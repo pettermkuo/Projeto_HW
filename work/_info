@@ -1,0 +1,449 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/mfcv/Desktop
+vbancoReg
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1554483293
+!i10b 1
+!s100 6<U[]mGB3mb?_YFUPFb8k2
+I;J<z95DUQ0V`0lEb2[S1M3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 bancoReg_sv_unit
+S1
+Z3 dC:/Users/mjmo/Downloads/Projeto_HW-master
+Z4 w1554472700
+8C:/Users/mjmo/Downloads/Projeto_HW-master/bancoReg.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/bancoReg.sv
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1554483293.000000
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/bancoReg.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/bancoReg.sv|
+!i113 1
+Z7 o-work work -sv
+Z8 tCvgOpt 0
+nbanco@reg
+vcontrole
+R0
+!s110 1554326651
+!i10b 1
+!s100 UTRLKgD3DPiHhmo^G:WS:1
+I;zoi8n74RdC;e:LKzok=O3
+R2
+Z9 !s105 uc_sv_unit
+S1
+Z10 dC:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw
+w1554326493
+8C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/uc.sv
+FC:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/uc.sv
+L0 2
+R5
+r1
+!s85 0
+31
+!s108 1554326651.000000
+!s107 C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/uc.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/uc.sv|
+!i113 1
+R7
+R8
+vDeslocamento
+R0
+R1
+!i10b 1
+!s100 EMH`UB_G1bTeiVdfJ^^>l1
+I8]BLEgljQDfXT_TDNEi^30
+R2
+!s105 Deslocamento_sv_unit
+S1
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/Deslocamento.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/Deslocamento.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/Deslocamento.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/Deslocamento.sv|
+!i113 1
+R7
+R8
+n@deslocamento
+Einstr_reg_risc_v
+R4
+Z11 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z12 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R3
+Z13 8C:/Users/mjmo/Downloads/Projeto_HW-master/Instr_Reg_RISC_V.vhd
+Z14 FC:/Users/mjmo/Downloads/Projeto_HW-master/Instr_Reg_RISC_V.vhd
+l0
+L49
+V7TD3cNADG8G:ODlTSzz?c1
+!s100 HF;HEc4<o>]o3`Jjc=WPJ2
+Z15 OV;C;10.5b;63
+32
+Z16 !s110 1554483294
+!i10b 1
+Z17 !s108 1554483294.000000
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/Instr_Reg_RISC_V.vhd|
+Z19 !s107 C:/Users/mjmo/Downloads/Projeto_HW-master/Instr_Reg_RISC_V.vhd|
+!i113 1
+Z20 o-work work -2002 -explicit
+Z21 tExplicit 1 CvgOpt 0
+Abehavioral_arch
+R11
+R12
+DEx4 work 16 instr_reg_risc_v 0 22 7TD3cNADG8G:ODlTSzz?c1
+l68
+L65
+Vo8SZoo^`iHF7`CU3CnhD`1
+!s100 e?bWG@:SnkVC476;`5UQ[1
+R15
+32
+R16
+!i10b 1
+R17
+R18
+R19
+!i113 1
+R20
+R21
+vMemoria32
+R0
+R16
+!i10b 1
+!s100 Q2gmKA>Pd1H;3=f[e^lb[3
+I[cF4=Te]MfFZVK;T^[?`k0
+R2
+!s105 Memoria32_sv_unit
+S1
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/Memoria32.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/Memoria32.sv
+Z22 L0 26
+R5
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/Memoria32.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/Memoria32.sv|
+!i113 1
+R7
+R8
+n@memoria32
+vMemoria64
+R0
+R16
+!i10b 1
+!s100 1fz3Mgbi`W1QjWk]9CgUO3
+IXi5RTb^2[XEZXDO>TU0LF3
+R2
+!s105 Memoria64_sv_unit
+S1
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/Memoria64.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/Memoria64.sv
+R22
+R5
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/Memoria64.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/Memoria64.sv|
+!i113 1
+R7
+R8
+n@memoria64
+vmux2
+R0
+Z23 !s110 1554483296
+!i10b 1
+!s100 @jVePRGB>Y?:nBbf4icHB0
+I9k=_XFMG06QP:A;jkNLaF2
+R2
+!s105 mux4_sv_unit
+S1
+R3
+w1554477237
+8C:/Users/mjmo/Downloads/Projeto_HW-master/mux4.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/mux4.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1554483296.000000
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/mux4.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/mux4.sv|
+!i113 1
+R7
+R8
+vpc
+R0
+!s110 1554326804
+!i10b 1
+!s100 aV9mj<D=ZiAcidMgYDk[b2
+IeZBUTV5i8@cd8X2UPX^Ci2
+R2
+!s105 pc_sv_unit
+S1
+R10
+w1554322559
+8C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/pc.sv
+FC:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/pc.sv
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1554326804.000000
+!s107 C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/pc.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/pc.sv|
+!i113 1
+R7
+R8
+vramOnChip
+!s110 1554332043
+!i10b 1
+!s100 P4USifFT`a0_oGX`1Kg7;3
+IjzO8E5b[c]=o8Ce1P<_[a3
+R2
+R10
+w1554324387
+8C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/ramOnChip32.v
+FC:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/ramOnChip32.v
+Z24 L0 40
+R5
+r1
+!s85 0
+31
+!s108 1554332043.000000
+!s107 C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/ramOnChip32.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/pmk2/Downloads/hw-20190403T201506Z-001/hw/ramOnChip32.v|
+!i113 1
+Z25 o-work work
+R8
+nram@on@chip
+vramOnChip32
+Z26 !s110 1554483295
+!i10b 1
+!s100 ?cVfgbFYaCB@4255f4cUf3
+I7^R2WHfMbXnh=QzY2=PmV2
+R2
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip32.v
+FC:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip32.v
+R24
+R5
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip32.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip32.v|
+!i113 1
+R25
+R8
+nram@on@chip32
+vramOnChip64
+R26
+!i10b 1
+!s100 cocMaFKEzGMH4F3EWeV]X1
+I80LjfTh8:ZFNH<>a0[GBX0
+R2
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip64.v
+FC:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip64.v
+R24
+R5
+r1
+!s85 0
+31
+Z27 !s108 1554483295.000000
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip64.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/ramOnChip64.v|
+!i113 1
+R25
+R8
+nram@on@chip64
+vregister
+R0
+R26
+!i10b 1
+!s100 bYE8;I>5ooJ_Za^;]7VNI0
+Id92eokj79z55Mlc2dC>bZ1
+R2
+!s105 register_sv_unit
+S1
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/register.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/register.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R27
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/register.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/register.sv|
+!i113 1
+R7
+R8
+vSignExt
+R0
+R26
+!i10b 1
+!s100 2C9X1=:8TAR5J`<NQEazE3
+Ih]<ocIKHbc1c=VQOKhg]_2
+R2
+!s105 SignExt_sv_unit
+S1
+R3
+w1554478074
+8C:/Users/mjmo/Downloads/Projeto_HW-master/SignExt.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/SignExt.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R27
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/SignExt.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/SignExt.sv|
+!i113 1
+R7
+R8
+n@sign@ext
+vsimulacao32
+R0
+R26
+!i10b 1
+!s100 lo4a^@h[P5oQ0c3A9:kel3
+I:d`@o9Gh1cgBKRWD<8IMb2
+R2
+!s105 simulacao32_sv_unit
+S1
+R3
+R4
+8C:/Users/mjmo/Downloads/Projeto_HW-master/simulacao32.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/simulacao32.sv
+L0 3
+R5
+r1
+!s85 0
+31
+R27
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/simulacao32.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/simulacao32.sv|
+!i113 1
+R7
+R8
+vuc
+R0
+R26
+!i10b 1
+!s100 ZkgSPBOUeM1nnj`?F=HVJ1
+IeYML2I2Ob[W751=TZS`Kz2
+R2
+R9
+S1
+R3
+w1554477688
+8C:/Users/mjmo/Downloads/Projeto_HW-master/uc.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/uc.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R27
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/uc.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/uc.sv|
+!i113 1
+R7
+R8
+Eula64
+R4
+Z28 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+R11
+R12
+R3
+Z29 8C:/Users/mjmo/Downloads/Projeto_HW-master/ula64.vhd
+Z30 FC:/Users/mjmo/Downloads/Projeto_HW-master/ula64.vhd
+l0
+L54
+VNKCl_dCU9VZRibAm_Jh<Y0
+!s100 gXP0QOjWED7GdgGCHP44]0
+R15
+32
+R23
+!i10b 1
+R27
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/ula64.vhd|
+Z32 !s107 C:/Users/mjmo/Downloads/Projeto_HW-master/ula64.vhd|
+!i113 1
+R20
+R21
+Abehavioral
+R28
+R11
+R12
+DEx4 work 5 ula64 0 22 NKCl_dCU9VZRibAm_Jh<Y0
+l80
+L70
+V0bJGE`7Xojm<X>7FGncTL1
+!s100 DoJmkJ?1Y9Zk;7@A7oGLb2
+R15
+32
+R23
+!i10b 1
+R27
+R31
+R32
+!i113 1
+R20
+R21
+vup
+R0
+R1
+!i10b 1
+!s100 ^IN5Kk7D2AE]jXET4[BHQ2
+I]em`RImL7=<::LGV6[;><3
+R2
+!s105 up_sv_unit
+S1
+R3
+w1554478079
+8C:/Users/mjmo/Downloads/Projeto_HW-master/up.sv
+FC:/Users/mjmo/Downloads/Projeto_HW-master/up.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/mjmo/Downloads/Projeto_HW-master/up.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/mjmo/Downloads/Projeto_HW-master/up.sv|
+!i113 1
+R7
+R8

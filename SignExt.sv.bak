@@ -1,0 +1,10 @@
+module SignExt(
+		input logic [31:0]entrada,
+		output logic [63:0]saida
+		);
+	always_comb
+	begin
+		saida[63:32] = 0;
+		saida[31:0] = entrada;	
+	end
+endmodule
