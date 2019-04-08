@@ -30,7 +30,7 @@ wire [63:0] SIGN_OUT;
 wire [63:0] SHIFT_OUT;
 
 
-uc UC(
+uc UC(D:/Users/pmk2/Downloads/Projeto_HW-master/Projeto_HW-master/Projeto_HW-master/bancoReg.sv
 	.CLK(CLK),
 	.RESET(RESET),
 	.ALU_SRCA(ALU_SRCA),
@@ -101,7 +101,7 @@ bancoReg BANCOREG(
         .dataout1(RS1),
         .dataout2(RS2)
 );
-
+D:/Users/pmk2/Downloads/Projeto_HW-master/Projeto_HW-master/Projeto_HW-master/bancoReg.sv
 Memoria32 MEMORIA32(
 	.raddress(PC_OUT[31:0]),
 	.waddress(),
