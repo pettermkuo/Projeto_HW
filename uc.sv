@@ -122,7 +122,8 @@ module uc(
 					begin
 						PROX_ESTADO = LUI;
 					end
-		endcase
+			endcase
+		end
 
 		R:
 			begin
@@ -214,6 +215,6 @@ module uc(
 			begin
 			end
 
-		end
+		
 	endcase
 endmodule
