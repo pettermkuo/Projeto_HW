@@ -3,9 +3,10 @@ module uc(
 	input logic RESET,
 	input logic [4:0] IR11_7, IR19_15, IR24_20,
 	input logic [6:0] IR6_0,
-	output logic ALU_SRCB, ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE,	
+	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE,	
 	output logic [2:0] ALU_SELECTOR,
-	output logic [6:0] ESTADO_ATUAL
+	output logic [6:0] ESTADO_ATUAL,
+	output logic [1:0] ALU_SRCB
 	);
 
 	enum logic [6:0]{
@@ -40,6 +41,9 @@ module uc(
 			ALU_SELECTOR = 0;
 			MEM32_WIRE = 0;
 			IR_WIRE = 0;
+			LOAD_A = 0;
+			LOAD_B = 0;
+			//BANCO_WIRE = ;
 			PROX_ESTADO = BUSCA;
 		end
 
@@ -52,6 +56,9 @@ module uc(
 			ALU_SELECTOR = 0;
 			MEM32_WIRE = 0;
 			IR_WIRE = 1;
+			LOAD_A = 0;
+			LOAD_B = 0;
+			//BANCO_WIRE = ;
 			PROX_ESTADO = SOMA;
 		end
 
@@ -64,26 +71,59 @@ module uc(
 			ALU_SELECTOR = 1;
 			MEM32_WIRE = 0;
 			IR_WIRE = 0;
+			LOAD_A = 0;
+			LOAD_B = 0;
+			//BANCO_WIRE = ;
 			PROX_ESTADO = DECODE;
 		end
 
 		DECODE:
 		begin
-		case(IR6_0)//LER OPCODE
+			case(IR6_0)//LER OPCODE
 			0110011://ADD,SUB
 			begin
-				/*case(FUNCT7)
-					ADD://0000000
+				/*case(FUNCT7) //TEM QUE VER EM QUE PARTE DA MEMORIA TA A FUNCT7(parece que é 31:25)
+					0000000: //ADD
 					begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 0;
+						ALU_SELECTOR = 1; //SOMA
+						MEM32_WIRE = 0;
+						IR_WIRE = 0;
+						LOAD_A = 0;
+						LOAD_B = 0;
+						PROX_ESTADO = BUSCA;
 					end
-
-					SUB://0100000
+				D:/Users/pmk2/Downloads/Projeto_HW-master/Projeto_HW-master/Projeto_HW-master/bancoReg.sv	0100000: //SUB
 					begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 0;
+						ALU_SELECTOR = 2; //SUB
+						MEM32_WIRE = 0;
+						IR_WIRE = 0;
+						LOAD_A = 0;
+						LOAD_B = 0;
+						PROX_ESTADO = BUSCA;
 					end
 				end*/
 			end
 			0010011://ADDI
 			begin
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				MEM32_WIRE = 0;
+				IR_WIRE = 0;
+				LOAD_A = 0;
+				LOAD_B = 0;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = BUSCA;
 			end
 
 			0000011://LD
@@ -109,4 +149,3 @@ module uc(
 		end
 	endcase
 endmodule
-
