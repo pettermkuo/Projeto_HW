@@ -1,6 +1,7 @@
 module uc(
 	input logic CLK,
 	input logic RESET,
+	input logic [31:0] IR31_0,
 	input logic [4:0] IR11_7, IR19_15, IR24_20,
 	input logic [6:0] IR6_0,
 	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE,	
