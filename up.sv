@@ -158,7 +158,8 @@ register REG_A(
 
 SignExt SIGNEXT(
 	.entrada(IR31_0),
-	.saida(SIGN_OUT)
+	.saida(SIGN_OUT),
+	.IR6_0(IR6_0)
 	);
 
 Deslocamento DESCOLAMENTO(
