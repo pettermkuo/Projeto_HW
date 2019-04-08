@@ -8,12 +8,14 @@ wire LOAD_A;
 wire LOAD_B;
 wire PC_WRITE;
 wire MEM32_WIRE;
+wire MEM64_WIRE;
 wire BANCO_WIRE;
 wire [1:0] ALU_SRCB;
 wire [1:0] Shift;
 wire [63:0] PC_IN;
 wire [63:0] PC_OUT;
-wire [31:0] MEM_TO_IR;
+wire [31:0] MEM_TO_IR_32;
+wire [63:0] MEM_TO_IR_64;
 wire [63:0] A_IN_ALU;
 wire [63:0] B_IN_ALU;
 wire [6:0] IR6_0;
@@ -40,6 +42,7 @@ uc UC(
 	.ALU_SELECTOR(ALU_SELECTOR),
 	.PC_WRITE(PC_WRITE),
 	.MEM32_WIRE(MEM32_WIRE),
+	.MEM64_WIRE(MEM64_WIRE),
 	.IR_WIRE(IR_WIRE),
 	.IR6_0(IR6_0),
 	.IR11_7(IR11_7),
@@ -108,8 +111,17 @@ Memoria32 MEMORIA32(
 	.waddress(),
 	.Clk(CLK),
 	.Datain(),
-	.Dataout(MEM_TO_IR),
+	.Dataout(MEM_TO_IR_32),
 	.Wr(MEM32_WIRE)
+	);
+
+Memoria64 MEMORIA64(
+	.raddress(PC_OUT[63:0]),
+	.waddress(),
+	.Clk(CLK),
+	.Datain(),
+	.Dataout(MEM_TO_IR_64),
+	.Wr(MEM64_WIRE)
 	);
 
 register PC(
