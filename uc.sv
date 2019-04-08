@@ -4,7 +4,7 @@ module uc(
 	input logic [31:0] IR31_0,
 	input logic [4:0] IR11_7, IR19_15, IR24_20,
 	input logic [6:0] IR6_0,
-	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE,	
+	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE, MEM64_WIRE,	
 	output logic [2:0] ALU_SELECTOR,
 	output logic [6:0] ESTADO_ATUAL,
 	output logic [1:0] ALU_SRCB
@@ -133,6 +133,17 @@ module uc(
 
 			0100011://SD
 			begin
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				MEM32_WIRE = 0;
+				IR_WIRE = 0;
+				LOAD_A = 0;
+				LOAD_B = 0;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = BUSCA;
 			end
 
 			1100011://BEQ
