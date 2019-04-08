@@ -137,10 +137,32 @@ module uc(
 
 			1100011://BEQ
 			begin
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 1;
+				ALU_SELECTOR = 011;//3
+				MEM32_WIRE = 0;
+				IR_WIRE = 1;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				//BANCO_WIRE = ;
+				//PROX_ESTADO = BUSCA;
 			end
 
 			1100111://BNE
 			begin
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 0;
+				ALU_SELECTOR = 110;//6
+				MEM32_WIRE = 0;
+				IR_WIRE = 1;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				//BANCO_WIRE = ;
+				//PROX_ESTADO = BUSCA;
 			end
 
 			0110111://LUI
