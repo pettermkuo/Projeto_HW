@@ -96,7 +96,7 @@ module uc(
 						LOAD_B = 0;
 						PROX_ESTADO = BUSCA;
 					end
-				D:/Users/pmk2/Downloads/Projeto_HW-master/Projeto_HW-master/Projeto_HW-master/bancoReg.sv	0100000: //SUB
+					0100000: //SUB
 					begin
 						PC_WRITE = 0;
 						RESET_WIRE = 0;
