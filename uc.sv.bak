@@ -41,6 +41,9 @@ module uc(
 			ALU_SELECTOR = 0;
 			MEM32_WIRE = 0;
 			IR_WIRE = 0;
+			LOAD_A = 0;
+			LOAD_B = 0;
+			//BANCO_WIRE = ;
 			PROX_ESTADO = BUSCA;
 		end
 
@@ -53,6 +56,9 @@ module uc(
 			ALU_SELECTOR = 0;
 			MEM32_WIRE = 0;
 			IR_WIRE = 1;
+			LOAD_A = 0;
+			LOAD_B = 0;
+			//BANCO_WIRE = ;
 			PROX_ESTADO = SOMA;
 		end
 
@@ -65,21 +71,44 @@ module uc(
 			ALU_SELECTOR = 1;
 			MEM32_WIRE = 0;
 			IR_WIRE = 0;
+			LOAD_A = 0;
+			LOAD_B = 0;
+			//BANCO_WIRE = ;
 			PROX_ESTADO = DECODE;
 		end
 
 		DECODE:
 		begin
-		case(IR6_0)//LER OPCODE
+			case(IR6_0)//LER OPCODE
 			0110011://ADD,SUB
 			begin
-				/*case(FUNCT7)
-					ADD://0000000
+				/*case(FUNCT7) //TEM QUE VER EM QUE PARTE DA MEMORIA TA A FUNCT7(parece que é 31:25)
+					0000000: //ADD
 					begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 0;
+						ALU_SELECTOR = 1; //SOMA
+						MEM32_WIRE = 0;
+						IR_WIRE = 0;
+						LOAD_A = 0;
+						LOAD_B = 0;
+						PROX_ESTADO = BUSCA;
 					end
 
-					SUB://0100000
+					0100000: //SUB
 					begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 0;
+						ALU_SELECTOR = 2; //SUB
+						MEM32_WIRE = 0;
+						IR_WIRE = 0;
+						LOAD_A = 0;
+						LOAD_B = 0;
+						PROX_ESTADO = BUSCA;
 					end
 				end*/
 			end
@@ -87,11 +116,14 @@ module uc(
 			begin
 				PC_WRITE = 0;
 				RESET_WIRE = 0;
-				ALU_SRCA = 0;
-				ALU_SRCB = 0;
-				ALU_SELECTOR = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
 				MEM32_WIRE = 0;
 				IR_WIRE = 0;
+				LOAD_A = 0;
+				LOAD_B = 0;
+				//BANCO_WIRE = ;
 				PROX_ESTADO = BUSCA;
 			end
 

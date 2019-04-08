@@ -5,8 +5,12 @@ module up( //FALTA COLOCAR OS FIOS DO SIGN EXTEND!!
 wire ALU_SRCA;
 wire [1:0] ALU_SRCB;
 wire IR_WIRE;
+wire LOAD_A;
+wire LOAD_B;
 wire PC_WRITE;
 wire RESET_WIRE;
+wire MEM32_WIRE;
+wire BANCO_WIRE;
 wire [63:0] PC_IN;
 wire [63:0] PC_OUT;
 wire [31:0] MEM_TO_IR;
@@ -18,18 +22,15 @@ wire [4:0] IR19_15;
 wire [4:0] IR24_20;
 wire [31:0] IR31_0;
 wire [2:0] ALU_SELECTOR;
-wire MEM32_WIRE;
 wire [63:0] RS1;
 wire [63:0] RS2;
-	wire [63:0] REG_A_MUX;//REGA
-	wire [63:0] REG_B_MUX;//REGB
-wire LOAD_A;
-wire LOAD_B;
-wire BANCO_WIRE;
-wire [64:0] SIGN_OUT;
+wire [63:0] REG_A_MUX;//REGA
+wire [63:0] REG_B_MUX;//REGB
+wire [63:0] SIGN_OUT;
+wire [63:0] SHIFT_OUT;
 
 
-uc UC(
+uc UC(D:/Users/pmk2/Downloads/Projeto_HW-master/Projeto_HW-master/Projeto_HW-master/bancoReg.sv
 	.CLK(CLK),
 	.RESET(RESET),
 	.ALU_SRCA(ALU_SRCA),
@@ -100,7 +101,7 @@ bancoReg BANCOREG(
         .dataout1(RS1),
         .dataout2(RS2)
 );
-
+D:/Users/pmk2/Downloads/Projeto_HW-master/Projeto_HW-master/Projeto_HW-master/bancoReg.sv
 Memoria32 MEMORIA32(
 	.raddress(PC_OUT[31:0]),
 	.waddress(),
@@ -137,8 +138,11 @@ register REG_B(
 SignExt SIGNEXT(
 	.entrada(IR31_0),
 	.saida(SIGN_OUT)
-);
+	);
 
-
+ShiftL1 SHIFTL1(
+	.entrada(SIGN_OUT),
+	.saida(SHIFT_OUT)
+	);
 
 endmodule

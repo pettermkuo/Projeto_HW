@@ -5,8 +5,12 @@ module up( //FALTA COLOCAR OS FIOS DO SIGN EXTEND!!
 wire ALU_SRCA;
 wire [1:0] ALU_SRCB;
 wire IR_WIRE;
+wire LOAD_A;
+wire LOAD_B;
 wire PC_WRITE;
 wire RESET_WIRE;
+wire MEM32_WIRE;
+wire BANCO_WIRE;
 wire [63:0] PC_IN;
 wire [63:0] PC_OUT;
 wire [31:0] MEM_TO_IR;
@@ -18,15 +22,12 @@ wire [4:0] IR19_15;
 wire [4:0] IR24_20;
 wire [31:0] IR31_0;
 wire [2:0] ALU_SELECTOR;
-wire MEM32_WIRE;
 wire [63:0] RS1;
 wire [63:0] RS2;
-wire [63:0] REGA;
-wire [63:0] REGB;
-wire LOAD_A;
-wire LOAD_B;
-wire BANCO_WIRE;
-wire [64:0] SIGN_OUT;
+wire [63:0] REG_A_MUX;//REGA
+wire [63:0] REG_B_MUX;//REGB
+wire [63:0] SIGN_OUT;
+wire [63:0] SHIFT_OUT;
 
 
 uc UC(
@@ -50,14 +51,14 @@ uc UC(
 
 mux2 MUX_A(
 	.SELETOR(ALU_SRCA),
-	.A(PC_OUT),
-	.B(REGA),
+	.ENTRADA_1(PC_OUT),
+	.ENTRADA_2(REG_A_MUX),
 	.SAIDA(A_IN_ALU)
 	);
 
 mux4 MUX_B(
 	.SELETOR(ALU_SRCB),
-	.A(REGB),
+	.A(REG_B_MUX),
 	.B(64'd4),
 	.C(SIGN_OUT),
 	.D(),
@@ -121,9 +122,9 @@ register PC(
 register REG_A(
 	.clk(CLK),
 	.reset(RESET),
-	.regWrite(LOAD_B),
+	.regWrite(LOAD_A),
 	.DadoIn(RS1),
-	.DadoOut(REGA)
+	.DadoOut(REG_A_MUX)
 	);
 
 register REG_B(
@@ -131,14 +132,17 @@ register REG_B(
 	.reset(RESET),
 	.regWrite(LOAD_B),
 	.DadoIn(RS2),
-	.DadoOut(REGB)
+	.DadoOut(REG_B_MUX)
 	);
 
 SignExt SIGNEXT(
 	.entrada(IR31_0),
 	.saida(SIGN_OUT)
-);
+	);
 
-
+ShiftL1 SHIFTL1(
+	.entrada(SIGN_OUT),
+	.saida(SHIFT_OUT)
+	);
 
 endmodule
