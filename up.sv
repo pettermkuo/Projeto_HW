@@ -1,4 +1,4 @@
-module up( //FALTA COLOCAR OS FIOS DO SIGN EXTEND!!
+module up( 
 	input logic CLK, RESET
 	);
 
