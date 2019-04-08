@@ -11,9 +11,21 @@ module SignExt(
 		end
 		1100011://BEQ
 		begin
+			saida[0] = 0;
+			saida[4:1] = entrada[11:8];
+			saida[10:5] = entrada[30:25];
+			saida[11] = entrada[7];
+			saida[12] = entrada[31];
+			saida[64:13] = 0;
 		end
 		1100111://BNE
 		begin
+			saida[0] = 0;
+			saida[4:1] = entrada[11:8];
+			saida[10:5] = entrada[30:25];
+			saida[11] = entrada[7];
+			saida[12] = entrada[31];
+			saida[64:13] = 0;
 		end
 		0110111://LUI
 		begin
