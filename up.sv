@@ -147,6 +147,14 @@ register REG_B(
 	.DadoIn(RS2),
 	.DadoOut(REG_B_MUX)
 	);
+	
+register REG_A(
+	.clk(CLK),
+	.reset(RESET),
+	.regWrite(LOAD_A),
+	.DadoIn(RS1),
+	.DadoOut(REG_A_MUX)
+	);
 
 SignExt SIGNEXT(
 	.entrada(IR31_0),
