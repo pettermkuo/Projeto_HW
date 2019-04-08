@@ -105,7 +105,35 @@ module uc(
 
 				0100011://SD
 					begin
-						PROX_ESTADO = SD;
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						//BANCO_WIRE = ;
+						PROX_ESTADO = SD2;
+					end
+					//SD2
+					begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+						DMEM_RW = 1; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						//BANCO_WIRE = ;
+						//PROX_ESTADO = //;
 					end
 
 				1100011://BEQ1
