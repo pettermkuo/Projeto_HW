@@ -90,7 +90,7 @@ module uc(
 						RESET_WIRE = 0;
 						ALU_SRCA = 1; //SELECIONA O REG_A_MUX
 						ALU_SRCB = 0; //SELECIONA O REG_B_MUX
-						ALU_SELECTOR = 1; //SOMA
+						ALU_SELECTOR = 1; //SOMA 001
 						MEM32_WIRE = 0;
 						IR_WIRE = 0;
 						LOAD_A = 0; //?
@@ -103,7 +103,7 @@ module uc(
 						RESET_WIRE = 0;
 						ALU_SRCA = 1; //SELECIONA O REG_A_MUX
 						ALU_SRCB = 0; //SELECIONA O REG_B_MUX
-						ALU_SELECTOR = 2; //SUB
+						ALU_SELECTOR = 2; //SUB 010
 						MEM32_WIRE = 0;
 						IR_WIRE = 0;
 						LOAD_A = 0; //?
