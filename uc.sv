@@ -93,8 +93,8 @@ module uc(
 						ALU_SELECTOR = 1; //SOMA 001
 						MEM32_WIRE = 0;
 						IR_WIRE = 0;
-						LOAD_A = 0; //?
-						LOAD_B = 0; //?
+						LOAD_A = 1; //?
+						LOAD_B = 1; //?
 						PROX_ESTADO = BUSCA;
 					end
 					0100000: //SUB
@@ -106,8 +106,8 @@ module uc(
 						ALU_SELECTOR = 2; //SUB 010
 						MEM32_WIRE = 0;
 						IR_WIRE = 0;
-						LOAD_A = 0; //?
-						LOAD_B = 0; //?
+						LOAD_A = 1; //?
+						LOAD_B = 1; //?
 						PROX_ESTADO = BUSCA;
 					end
 				end*/
