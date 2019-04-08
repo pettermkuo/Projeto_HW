@@ -88,8 +88,8 @@ module uc(
 					begin
 						PC_WRITE = 0;
 						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 0;
+						ALU_SRCA = 1; //SELECIONA O REG_A_MUX
+						ALU_SRCB = 0; //SELECIONA O REG_B_MUX
 						ALU_SELECTOR = 1; //SOMA
 						MEM32_WIRE = 0;
 						IR_WIRE = 0;
@@ -101,8 +101,8 @@ module uc(
 					begin
 						PC_WRITE = 0;
 						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 0;
+						ALU_SRCA = 1; //SELECIONA O REG_A_MUX
+						ALU_SRCB = 0; //SELECIONA O REG_B_MUX
 						ALU_SELECTOR = 2; //SUB
 						MEM32_WIRE = 0;
 						IR_WIRE = 0;
