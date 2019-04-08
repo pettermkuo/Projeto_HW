@@ -8,6 +8,8 @@ module SignExt(
 	case(IR6_0)
 		0010011://ADDI
 		begin
+			saida[63:12] = 0;
+			saida[11:0] = entrada[31:20];
 		end
 		1100011://BEQ
 		begin
@@ -33,7 +35,3 @@ module SignExt(
 	endcase
 	end
 endmodule
-		/*
-		saida[63:12] = 0;
-		saida[11:0] = entrada[31:20];	
-		*/
