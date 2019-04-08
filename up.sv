@@ -116,11 +116,11 @@ Memoria32 MEMORIA32(
 	);
 
 Memoria64 MEMORIA64(
-	.raddress(PC_OUT[63:0]),
+	.raddress(),
 	.waddress(),
 	.Clk(CLK),
 	.Datain(),
-	.Dataout(MEM_TO_IR_64),
+	.Dataout(),
 	.Wr(MEM64_WIRE)
 	);
 
