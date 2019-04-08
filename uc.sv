@@ -83,7 +83,7 @@ module uc(
 			case(IR6_0)//LER OPCODE
 			0110011://ADD,SUB
 			begin
-				/*case(IR31_0 [31:25]) //TEM QUE VER EM QUE PARTE DA MEMORIA TA A FUNCT7(parece que é 31:25)
+				/*case(IR31_0 [31:25]) //CONFIRMAR QUE A FUNCT7 TA NESSE INTERVALO E VE SE PODE DEIXAR ASSIM
 					0000000: //ADD
 					begin
 						PC_WRITE = 0;
