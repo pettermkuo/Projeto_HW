@@ -4,14 +4,14 @@ module uc(
 	input logic [31:0] IR31_0,
 	input logic [4:0] IR11_7, IR19_15, IR24_20,
 	input logic [6:0] IR6_0,
-	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE,LOAD_A_OUT,LOAD_MDR,MEM_TO_REG,WRITE_REG,DMEM_RW,
+	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE, LOAD_A_OUT, LOAD_MDR, MEM_TO_REG, WRITE_REG, DMEM_RW,
 	output logic [2:0] ALU_SELECTOR,
-	output logic [6:0] ESTADO_ATUAL,
+ 	output logic [6:0] ESTADO_ATUAL,
 	output logic [1:0] ALU_SRCB
 
 	);
 
-	enum logic [6:0]{
+	enum logic [15:0]{
 		RESET_ESTADO, //0
 		BUSCA, //1
 		SOMA, //2
@@ -130,36 +130,35 @@ module uc(
 
 		R:
 			begin
-				/*
 				case(IR31_0 [31:25]) //CONFIRMAR QUE A FUNCT7 TA NESSE INTERVALO E VE SE PODE DEIXAR ASSIM
-				0000000: //ADD
-				begin
-					PC_WRITE = 0;
-					RESET_WIRE = 0;
-					ALU_SRCA = 1; //SELECIONA O REG_A_MUX
-					ALU_SRCB = 0; //SELECIONA O REG_B_MUX
-					ALU_SELECTOR = 1; //SOMA 001
-					MEM32_WIRE = 0;
-					IR_WIRE = 0;
-					LOAD_A = 1; //?
-					LOAD_B = 1; //?
-					PROX_ESTADO = BUSCA;
+					0000000: //ADD
+						begin
+							PC_WRITE = 0;
+							RESET_WIRE = 0;
+							ALU_SRCA = 1; //SELECIONA O REG_A_MUX
+							ALU_SRCB = 0; //SELECIONA O REG_B_MUX
+							ALU_SELECTOR = 1; //SOMA 001
+							MEM32_WIRE = 0;
+							IR_WIRE = 0;
+							LOAD_A = 1;
+							LOAD_B = 1;
+							PROX_ESTADO = BUSCA;
+						end
+					0100000: //SUB
+						begin
+							PC_WRITE = 0;
+							RESET_WIRE = 0;
+							ALU_SRCA = 1; //SELECIONA O REG_A_MUX
+							ALU_SRCB = 0; //SELECIONA O REG_B_MUX
+							ALU_SELECTOR = 2; //SUB 010
+							MEM32_WIRE = 0;
+							IR_WIRE = 0;
+							LOAD_A = 1;
+							LOAD_B = 1; 
+							PROX_ESTADO = BUSCA;
+						end
+				endcase
 			end
-				0100000: //SUB
-			begin
-					PC_WRITE = 0;
-					RESET_WIRE = 0;
-					ALU_SRCA = 1; //SELECIONA O REG_A_MUX
-					ALU_SRCB = 0; //SELECIONA O REG_B_MUX
-					ALU_SELECTOR = 2; //SUB 010
-					MEM32_WIRE = 0;
-					IR_WIRE = 0;
-					LOAD_A = 1; //?
-					LOAD_B = 1; //?
-					PROX_ESTADO = BUSCA;
-			end
-				*/
-		end
 
 		ADDI:
 			begin
