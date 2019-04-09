@@ -33,7 +33,7 @@ module SignExt(
 		begin
 		saida[31:12] = entrada[31:12];
 		saida[11:0]=0;
-		if(entrada[31]==0))saida[63:32]=0;
+		if(entrada[31]==0)saida[63:32]=0;
 		else saida[63:32]=1;
 		end
 	endcase
