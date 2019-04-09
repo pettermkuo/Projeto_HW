@@ -4,10 +4,11 @@ module uc(
 	input logic [31:0] IR31_0,
 	input logic [4:0] IR11_7, IR19_15, IR24_20,
 	input logic [6:0] IR6_0,
-	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE,	
+	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE,LOAD_A_OUT,LOAD_MDR,MEM_TO_REG,WRITE_REG,DMEM_RW,
 	output logic [2:0] ALU_SELECTOR,
 	output logic [6:0] ESTADO_ATUAL,
 	output logic [1:0] ALU_SRCB
+
 	);
 
 	enum logic [6:0]{
@@ -17,8 +18,11 @@ module uc(
 		DECODE, //3
 		R, //4
 		ADDI, //5
-		SD, //6 
-		LD, //7
+		SD1, //6 
+		SD2,
+		LD1, //7
+		LD2,
+		LD3,
 		BEQ, BEQ2, //8,9
 		BNE, BNE2, // 10,11
 		LUI //12
@@ -100,42 +104,13 @@ module uc(
 
 				0000011://LD
 					begin
-						PROX_ESTADO = LD;
+						PROX_ESTADO = LD1;
 					end
 
 				0100011://SD
 					begin
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
-						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						//BANCO_WIRE = ;
-						PROX_ESTADO = SD2;
-					end
-					//SD2
-					begin
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
-						DMEM_RW = 1; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						//BANCO_WIRE = ;
-						//PROX_ESTADO = //;
-					end
-
+						PROX_ESTADO =SD1;
+					end	
 				1100011://BEQ1
 					begin
 						PROX_ESTADO = BEQ;
@@ -169,9 +144,9 @@ module uc(
 					LOAD_A = 1; //?
 					LOAD_B = 1; //?
 					PROX_ESTADO = BUSCA;
-				end
+			end
 				0100000: //SUB
-				begin
+			begin
 					PC_WRITE = 0;
 					RESET_WIRE = 0;
 					ALU_SRCA = 1; //SELECIONA O REG_A_MUX
@@ -182,7 +157,7 @@ module uc(
 					LOAD_A = 1; //?
 					LOAD_B = 1; //?
 					PROX_ESTADO = BUSCA;
-				end
+			end
 				*/
 		end
 
@@ -193,20 +168,105 @@ module uc(
 				ALU_SRCA = 1;
 				ALU_SRCB = 2;
 				ALU_SELECTOR = 1;
+				//LOAD_A_OUT = ;
+				//DMEM_RW = ;
 				MEM32_WIRE = 0;
 				IR_WIRE = 0;
 				LOAD_A = 0;
 				LOAD_B = 0;
-				//BANCO_WIRE = ;
+				//BANCO_WIRE = 0;
 				PROX_ESTADO = BUSCA;
 			end
 
-		SD:
+		SD1:
+					begin
+
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						//BANCO_WIRE = ;
+						PROX_ESTADO = SD2;
+					end
+	        SD2:
+					begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+						DMEM_RW = 1; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						//BANCO_WIRE = ;
+						//PROX_ESTADO = //;
+					end
+
+		LD1:
 			begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1;
+						DMEM_RW = 0;
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						LOAD_MDR = 0;
+						//BANCO_WIRE = ;
+						PROX_ESTADO = LD2;
+			end
+		
+		LD2:
+			begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						LOAD_MDR = 1;
+						//BANCO_WIRE = ;
+						PROX_ESTADO = LD3;
 			end
 
-		LD:
+		
+		LD3:
 			begin
+						PC_WRITE = 0;
+						RESET_WIRE = 0;
+						ALU_SRCA = 1;
+						ALU_SRCB = 2;
+						ALU_SELECTOR = 1;
+						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+						MEM32_WIRE = 1;
+						//IR_WIRE = ;
+						LOAD_A = 1;
+						LOAD_B = 1;
+						LOAD_MDR = 1;
+						MEM_TO_REG=1;
+						WRITE_REG=1;
+						//BANCO_WIRE = ;
+						//PROX_ESTADO =;
 			end
 
 		BEQ:
@@ -241,6 +301,20 @@ module uc(
 
 		LUI:
 			begin
+			
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+				MEM32_WIRE = 1;
+				//IR_WIRE = ;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = SD2;
 			end
 
 		
