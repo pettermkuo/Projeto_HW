@@ -153,6 +153,7 @@ register REG_B(
 	.DadoOut(REG_B_MUX)
 	);
 	
+
 SignExt SIGNEXT(
 	.entrada(IR31_0),
 	.saida(SIGN_OUT),
