@@ -274,13 +274,29 @@ module uc(
 				RESET_WIRE = 0;
 				ALU_SRCA = 1;
 				ALU_SRCB = 0;
-				ALU_SELECTOR = 011;//3
 				MEM32_WIRE = 0;
 				IR_WIRE = 1;
 				LOAD_A = 1;
 				LOAD_B = 1;
 				//BANCO_WIRE = ;
 				PROX_ESTADO = BEQ2;
+			end
+		BEQ2:
+			begin
+				if(Igual == 1)
+				begin
+					PC_WRITE = 0;
+					RESET_WIRE = 0;
+					ALU_SRCA = 0;
+					ALU_SRCB = 3;
+					ALU_SELECTOR = 001;//1
+					MEM32_WIRE = 0;
+					IR_WIRE = 1;
+					LOAD_A = 1;
+					LOAD_B = 1;
+					//BANCO_WIRE = ;
+					PROX_ESTADO = BUSCA;
+				end
 			end
 
 		BNE:
@@ -289,14 +305,31 @@ module uc(
 				RESET_WIRE = 0;
 				ALU_SRCA = 1;
 				ALU_SRCB = 0;
-				ALU_SELECTOR = 011;//3
 				MEM32_WIRE = 0;
 				IR_WIRE = 1;
 				LOAD_A = 1;
 				LOAD_B = 1;
 				//BANCO_WIRE = ;
-				PROX_ESTADO = BNE2;
+				PROX_ESTADO = BEQ2;
 			end
+		BNE2:
+			begin
+				if(Igual != 1)
+				begin
+					PC_WRITE = 0;
+					RESET_WIRE = 0;
+					ALU_SRCA = 0;
+					ALU_SRCB = 3;
+					ALU_SELECTOR = 001;//1
+					MEM32_WIRE = 0;
+					IR_WIRE = 1;
+					LOAD_A = 1;
+					LOAD_B = 1;
+					//BANCO_WIRE = ;
+					PROX_ESTADO = BUSCA;
+				end
+			end
+
 
 		LUI:
 			begin
