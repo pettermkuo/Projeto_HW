@@ -2,6 +2,7 @@ module up(
 	input logic CLK, RESET
 	);
 
+wire RESET_WIRE;
 wire ALU_SRCA;
 wire IR_WIRE;
 wire LOAD_A;
@@ -15,6 +16,7 @@ wire LOAD_MDR;
 wire MEM_TO_REG;
 wire WRITE_REG;
 wire DMEM_RW;
+wire Igual;
 wire [1:0] ALU_SRCB;
 wire [1:0] Shift;
 wire [63:0] PC_IN;
@@ -43,7 +45,7 @@ uc UC(
 	.RESET(RESET),
 	.ALU_SRCA(ALU_SRCA),
 	.ALU_SRCB(ALU_SRCB),
-	.RESET_WIRE(RESET),
+	.RESET_WIRE(RESET_WIRE),
 	.ALU_SELECTOR(ALU_SELECTOR),
 	.PC_WRITE(PC_WRITE),
 	.MEM32_WIRE(MEM32_WIRE),
@@ -55,7 +57,8 @@ uc UC(
 	.IR24_20(IR24_20),
 	.LOAD_A(LOAD_A),
 	.LOAD_B(LOAD_B),
-	.BANCO_WIRE(BANCO_WIRE)
+	.BANCO_WIRE(BANCO_WIRE),
+	.Igual(Igual)
 	);
 
 mux2 MUX_A(
@@ -82,7 +85,7 @@ ula64 ALU (
 	.Overflow(),
 	.Negativo(),
 	.z(),
-	.Igual(),
+	.Igual(Igual),
 	.Maior(),
 	.Menor()
 	);
@@ -91,7 +94,7 @@ Instr_Reg_RISC_V BANCO(
 	.Clk(CLK),
 	.Reset(RESET),
 	.Load_ir(IR_WIRE),
-	.Entrada(MEM_TO_IR),
+	.Entrada(MEM_TO_IR_32),
 	.Instr19_15(IR19_15),
 	.Instr24_20(IR24_20),
 	.Instr11_7(IR11_7),
