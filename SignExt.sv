@@ -18,7 +18,7 @@ module SignExt(
 			saida[10:5] = entrada[30:25];
 			saida[11] = entrada[7];
 			saida[12] = entrada[31];
-			saida[64:13] = 0;
+			saida[63:13] = 0;
 		end
 		1100111://BNE
 		begin
@@ -27,7 +27,7 @@ module SignExt(
 			saida[10:5] = entrada[30:25];
 			saida[11] = entrada[7];
 			saida[12] = entrada[31];
-			saida[64:13] = 0;
+			saida[63:13] = 0;
 		end
 		0110111://LUI
 		begin
