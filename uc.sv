@@ -93,7 +93,7 @@ module uc(
 		DECODE:
 		begin
 			case(IR6_0)//LER OPCODE
-				11001101://ADD,SUB
+				11001101://ADD,SUB LEMBRAR QUE O OPCODE ESTA MODIFICADO
 					begin
 						PROX_ESTADO = R;
 					end
