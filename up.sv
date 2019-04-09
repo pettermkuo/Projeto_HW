@@ -1,21 +1,24 @@
-module up( 
-	input logic CLK, RESET
+module up( //FALTA COLOCAR OS FIOS DO SIGN EXTEND!!
+	input logic CLK, RESET//ok
 	);
 
 wire ALU_SRCA;
+wire [1:0] ALU_SRCB;
 wire IR_WIRE;
 wire LOAD_A;
 wire LOAD_B;
-wire PC_WRITE;
-wire MEM32_WIRE;
-wire MEM64_WIRE;
-wire BANCO_WIRE;
-wire [1:0] ALU_SRCB;
-wire [1:0] Shift;
+wire PC_WRITE;//ok
+wire RESET_WIRE;//ok
+wire MEM32_WIRE;//ok
+wire BANCO_WIRE;//ok
+wire LOAD_A_OUT; //ok
+wire LOAD_MDR; //ok
+wire MEM_TO_REG; //ok
+wire WRITE_REG; //ok
+wire DMEM_RW; //ok
 wire [63:0] PC_IN;
 wire [63:0] PC_OUT;
-wire [31:0] MEM_TO_IR_32;
-wire [63:0] MEM_TO_IR_64;
+wire [31:0] MEM_TO_IR;
 wire [63:0] A_IN_ALU;
 wire [63:0] B_IN_ALU;
 wire [6:0] IR6_0;
@@ -30,7 +33,6 @@ wire [63:0] REG_A_MUX;//REGA
 wire [63:0] REG_B_MUX;//REGB
 wire [63:0] SIGN_OUT;
 wire [63:0] SHIFT_OUT;
-wire [5:0] SHIFT_QTD;
 
 
 uc UC(
@@ -38,11 +40,10 @@ uc UC(
 	.RESET(RESET),
 	.ALU_SRCA(ALU_SRCA),
 	.ALU_SRCB(ALU_SRCB),
-	.RESET_WIRE(RESET),
+	.RESET_WIRE(RESET_WIRE),
 	.ALU_SELECTOR(ALU_SELECTOR),
 	.PC_WRITE(PC_WRITE),
 	.MEM32_WIRE(MEM32_WIRE),
-	.MEM64_WIRE(MEM64_WIRE),
 	.IR_WIRE(IR_WIRE),
 	.IR6_0(IR6_0),
 	.IR11_7(IR11_7),
@@ -57,6 +58,7 @@ mux2 MUX_A(
 	.SELETOR(ALU_SRCA),
 	.ENTRADA_1(PC_OUT),
 	.ENTRADA_2(REG_A_MUX),
+	.ENTRADA_3(64'd0),
 	.SAIDA(A_IN_ALU)
 	);
 
@@ -111,17 +113,8 @@ Memoria32 MEMORIA32(
 	.waddress(),
 	.Clk(CLK),
 	.Datain(),
-	.Dataout(MEM_TO_IR_32),
+	.Dataout(MEM_TO_IR),
 	.Wr(MEM32_WIRE)
-	);
-
-Memoria64 MEMORIA64(
-	.raddress(),
-	.waddress(),
-	.Clk(CLK),
-	.Datain(),
-	.Dataout(),
-	.Wr(MEM64_WIRE)
 	);
 
 register PC(
@@ -147,26 +140,15 @@ register REG_B(
 	.DadoIn(RS2),
 	.DadoOut(REG_B_MUX)
 	);
-	
-register REG_A(
-	.clk(CLK),
-	.reset(RESET),
-	.regWrite(LOAD_A),
-	.DadoIn(RS1),
-	.DadoOut(REG_A_MUX)
-	);
 
 SignExt SIGNEXT(
 	.entrada(IR31_0),
-	.saida(SIGN_OUT),
-	.IR6_0(IR6_0)
+	.saida(SIGN_OUT)
 	);
 
-Deslocamento DESCOLAMENTO(
-	.Shift(SHIFT_LR),
-	.N(SHIFT_QTD),
-	.Entrada(SIGN_OUT),
-	.Saida(SHIFT_OUT)
+ShiftL1 SHIFTL1(
+	.entrada(SIGN_OUT),
+	.saida(SHIFT_OUT)
 	);
 
 endmodule
