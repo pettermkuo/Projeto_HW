@@ -40,7 +40,7 @@ begin
 		if(rdaddress < 64) rdaddress <= rdaddress + 4;
 		else begin
 			rdaddress <= 0;
-			$stop;
+			
 		end
 	end
 end

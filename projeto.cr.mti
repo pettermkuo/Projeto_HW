@@ -1,0 +1,116 @@
+C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/up.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/up.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module up
+
+Top level modules:
+	up
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/register.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/register.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module register
+
+Top level modules:
+	register
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/mux4.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/mux4.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mux4
+
+Top level modules:
+	mux4
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Memoria32.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Memoria32.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Memoria32
+
+Top level modules:
+	Memoria32
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/bancoReg.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/bancoReg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module bancoReg
+
+Top level modules:
+	bancoReg
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/SignExt.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/SignExt.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module SignExt
+
+Top level modules:
+	SignExt
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Instr_Reg_RISC_V.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Instr_Reg_RISC_V.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Instr_Reg_RISC_V
+-- Compiling architecture behavioral_arch of Instr_Reg_RISC_V
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Memoria64.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Memoria64.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Memoria64
+
+Top level modules:
+	Memoria64
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ula64.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ula64.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Compiling entity Ula64
+-- Compiling architecture behavioral of Ula64
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Deslocamento.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/Deslocamento.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Deslocamento
+
+Top level modules:
+	Deslocamento
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/uc.sv {1 {vlog -work work -sv -stats=none {C:\Users\mfcv\Downloads\Projeto_HW-master\Projeto_HW-master\uc.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module uc
+
+Top level modules:
+	uc
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ramOnChip64.v {1 {vlog -work work -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ramOnChip64.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ramOnChip64
+
+Top level modules:
+	ramOnChip64
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/simulacao32.sv {1 {vlog -work work -sv -stats=none {C:\Users\mfcv\Downloads\Projeto_HW-master\Projeto_HW-master\simulacao32.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module simulacao32
+
+Top level modules:
+	simulacao32
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ShiftL1.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ShiftL1.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ShiftL1
+
+Top level modules:
+	ShiftL1
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ramOnChip32.v {1 {vlog -work work -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/ramOnChip32.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ramOnChip32
+
+Top level modules:
+	ramOnChip32
+
+} {} {}} C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/mux2.sv {1 {vlog -work work -sv -stats=none C:/Users/mfcv/Downloads/Projeto_HW-master/Projeto_HW-master/mux2.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mux2
+
+Top level modules:
+	mux2
+
+} {} {}}

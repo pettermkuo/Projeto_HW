@@ -11,8 +11,8 @@ wire PC_WRITE;
 wire MEM32_WIRE;
 wire MEM64_WIRE;
 wire BANCO_WIRE;
-wire LOAD_A_OUT;
 wire LOAD_MDR;
+wire LOAD_ALU_OUT;
 wire MEM_TO_REG;
 wire WRITE_REG;
 wire DMEM_RW;
@@ -37,7 +37,7 @@ wire [63:0] REG_A_MUX;//REGA
 wire [63:0] REG_B_MUX;//REGB
 wire [63:0] SIGN_OUT;
 wire [63:0] SHIFT_OUT;
-wire [5:0] SHIFT_QTD;
+wire [15:0] SAIDA_ESTADO;
 
 
 uc UC(
@@ -58,28 +58,30 @@ uc UC(
 	.LOAD_A(LOAD_A),
 	.LOAD_B(LOAD_B),
 	.BANCO_WIRE(BANCO_WIRE),
-	.Igual(Igual)
+	.Igual(Igual),
+	.SAIDA_ESTADO(SAIDA_ESTADO),
+	.LOAD_ALU_OUT(LOAD_ALU_OUT)
 	);
 
-mux2 MUX_A(
+mux2 MUX_A( //ok
 	.SELETOR(ALU_SRCA),
 	.ENTRADA_1(PC_OUT),
 	.ENTRADA_2(REG_A_MUX),
 	.SAIDA(A_IN_ALU)
 	);
 
-mux4 MUX_B(
+mux4 MUX_B( //ok
 	.SELETOR(ALU_SRCB),
 	.A(REG_B_MUX),
 	.B(64'd4),
 	.C(SIGN_OUT),
-	.D(),
+	.D(SHIFT_OUT),
 	.SAIDA(B_IN_ALU)
 	);
 
-ula64 ALU (
+ula64 ALU ( //ok
 	.A(A_IN_ALU),
-	.B(),
+	.B(B_IN_ALU),
 	.Seletor(ALU_SELECTOR),
 	.S(PC_IN),
 	.Overflow(),
@@ -90,7 +92,7 @@ ula64 ALU (
 	.Menor()
 	);
 
-Instr_Reg_RISC_V BANCO(
+Instr_Reg_RISC_V BANCO(//ok
 	.Clk(CLK),
 	.Reset(RESET),
 	.Load_ir(IR_WIRE),
@@ -102,8 +104,8 @@ Instr_Reg_RISC_V BANCO(
 	.Instr31_0(IR31_0)
 	);
 
-bancoReg BANCOREG(
-	.write(BANCO_WIRE), 
+bancoReg BANCOREG(//ok
+	.write(BANCO_WIRE), //p
 	.clock(CLK),
         .reset(RESET),
         .regreader1(IR19_15),
@@ -114,25 +116,25 @@ bancoReg BANCOREG(
         .dataout2(RS2)
 );
 
-Memoria32 MEMORIA32(
-	.raddress(PC_OUT[31:0]),
-	.waddress(),
+Memoria32 MEMORIA32(//p
+	.raddress(PC_OUT[31:0]), //endereço de ler
+	.waddress(), //endereço de esrever (mem32 nunca escreve)
 	.Clk(CLK),
 	.Datain(),
 	.Dataout(MEM_TO_IR_32),
-	.Wr(MEM32_WIRE)
+	.Wr(MEM32_WIRE) //define se é leitura ou escrita
 	);
 
-Memoria64 MEMORIA64(
-	.raddress(),
-	.waddress(),
+Memoria64 MEMORIA64(//p
+	.raddress(PC_IN[63:0]), //endereço de ler //PC_IN pq eh a saida do alu_out
+	.waddress(), //endereço de escrever
 	.Clk(CLK),
 	.Datain(),
-	.Dataout(),
-	.Wr(MEM64_WIRE)
+	.Dataout(), //saida vai ser a entrada do memory data reg
+	.Wr(MEM64_WIRE) //wr se for 0 le, se for 1 escreve
 	);
 
-register PC(
+register PC(//ok
 	.clk(CLK),
 	.reset(RESET),
 	.regWrite(PC_WRITE),
@@ -140,7 +142,7 @@ register PC(
 	.DadoOut(PC_OUT)
 	);
 
-register REG_A(
+register REG_A(//ok
 	.clk(CLK),
 	.reset(RESET),
 	.regWrite(LOAD_A),
@@ -148,7 +150,7 @@ register REG_A(
 	.DadoOut(REG_A_MUX)
 	);
 
-register REG_B(
+register REG_B(//ok
 	.clk(CLK),
 	.reset(RESET),
 	.regWrite(LOAD_B),
@@ -157,17 +159,17 @@ register REG_B(
 	);
 	
 
-SignExt SIGNEXT(
+SignExt SIGNEXT(//ok
 	.entrada(IR31_0),
 	.saida(SIGN_OUT),
 	.IR6_0(IR6_0)
 	);
 
-Deslocamento DESCOLAMENTO(
-	.Shift(SHIFT_LR),
-	.N(SHIFT_QTD),
-	.Entrada(SIGN_OUT),
-	.Saida(SHIFT_OUT)
+ShiftL1 SHIFTL1(//ok
+	.entrada(SIGN_OUT),
+	.saida(SHIFT_OUT)
 	);
+
+
 
 endmodule

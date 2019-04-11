@@ -5,10 +5,11 @@ module uc(
 	input logic [31:0] IR31_0,
 	input logic [4:0] IR11_7, IR19_15, IR24_20,
 	input logic [6:0] IR6_0,
-	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, MEM64_WIRE, LOAD_A, LOAD_B, BANCO_WIRE, LOAD_A_OUT, LOAD_MDR, MEM_TO_REG, WRITE_REG, DMEM_RW,
+	output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, MEM64_WIRE, LOAD_A, LOAD_B, BANCO_WIRE, LOAD_ALU_OUT, LOAD_MDR, MEM_TO_REG, WRITE_REG, DMEM_RW,
 	output logic [2:0] ALU_SELECTOR,
  	output logic [6:0] ESTADO_ATUAL,
-	output logic [1:0] ALU_SRCB
+	output logic [1:0] ALU_SRCB,
+	output logic [15:0] SAIDA_ESTADO
 
 	);
 
@@ -42,87 +43,103 @@ module uc(
 	end
 	
 	assign ESTADO_ATUAL = ESTADO;
+	assign FUNCT7 = IR31_0[31:25];
 
 	always_comb 
 	case(ESTADO)
 		RESET_ESTADO:
 		begin
+			SAIDA_ESTADO = 0;
 			PC_WRITE = 0;
 			RESET_WIRE = 1;
 			ALU_SRCA = 0;
 			ALU_SRCB = 0;
 			ALU_SELECTOR = 0;
+			LOAD_ALU_OUT = 0; //FALTA DECLARAR NA UC
+			DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 			MEM32_WIRE = 0;
 			IR_WIRE = 0;
 			LOAD_A = 0;
 			LOAD_B = 0;
+			LOAD_MDR = 0;
 			//BANCO_WIRE = ;
 			PROX_ESTADO = BUSCA;
 		end
 
 		BUSCA:
 		begin
+			SAIDA_ESTADO = 1;
 			PC_WRITE = 0;
 			RESET_WIRE = 0;
 			ALU_SRCA = 0;
 			ALU_SRCB = 0;
 			ALU_SELECTOR = 0;
+			LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+			DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 			MEM32_WIRE = 0;
 			IR_WIRE = 1;
 			LOAD_A = 0;
 			LOAD_B = 0;
+			LOAD_MDR = 0;
 			//BANCO_WIRE = ;
 			PROX_ESTADO = SOMA;
 		end
 
 		SOMA:
 		begin
+			SAIDA_ESTADO = 2;
 			PC_WRITE = 1;
 			RESET_WIRE = 0;
 			ALU_SRCA = 0;
 			ALU_SRCB = 1;
 			ALU_SELECTOR = 1;
+			LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+			DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 			MEM32_WIRE = 0;
 			IR_WIRE = 0;
 			LOAD_A = 0;
 			LOAD_B = 0;
+			LOAD_MDR = 0;
 			//BANCO_WIRE = ;
 			PROX_ESTADO = DECODE;
 		end
 
 		DECODE:
 		begin
+			IR_WIRE = 0;
+			PC_WRITE = 0;
+			SAIDA_ESTADO = 3;
 			case(IR6_0)//LER OPCODE
-				11001101://ADD,SUB LEMBRAR QUE O OPCODE ESTA MODIFICADO
+				51://ADD,SUB LEMBRAR QUE O OPCODE ESTA MODIFICADO
 					begin
 						PROX_ESTADO = R;
 					end
 
-				0010011://ADDI
+				19://ADDI
 					begin
 						PROX_ESTADO = ADDI;
 					end
 
-				0000011://LD
+				3://LD
 					begin
 						PROX_ESTADO = LD1;
 					end
 
-				0100011://SD
+				35://SD
 					begin
 						PROX_ESTADO = SD1;
 					end	
-				1100011://BEQ1
+				99://BEQ1
 					begin
 						PROX_ESTADO = BEQ;
 					end
 
-				1100111://BNE
+				103://BNE
 					begin
 						PROX_ESTADO = BNE;
 					end
 
-				0110111://LUI
+				55://LUI
 					begin
 						PROX_ESTADO = LUI;
 					end
@@ -131,103 +148,127 @@ module uc(
 
 		R:
 			begin
-				case(IR31_0 [31:25]) //CONFIRMAR QUE A FUNCT7 TA NESSE INTERVALO E VE SE PODE DEIXAR ASSIM
-					0000000: //ADD
+				case(FUNCT7) //CONFIRMAR QUE A FUNCT7 TA NESSE INTERVALO E VE SE PODE DEIXAR ASSIM
+					0: //ADD
 						begin
+							SAIDA_ESTADO = 4;
 							PC_WRITE = 0;
 							RESET_WIRE = 0;
 							ALU_SRCA = 1; //SELECIONA O REG_A_MUX
 							ALU_SRCB = 0; //SELECIONA O REG_B_MUX
 							ALU_SELECTOR = 1; //SOMA 001
+							LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+							DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 							MEM32_WIRE = 0;
-							IR_WIRE = 1;
+							IR_WIRE = 0;
 							LOAD_A = 1;
-							LOAD_B = 1;
+							LOAD_B = 1;	
+							LOAD_MDR = 0;
 							PROX_ESTADO = BUSCA;
 						end
-					0100000: //SUB
+					32: //SUB
 						begin
+							SAIDA_ESTADO = 5;
 							PC_WRITE = 0;
 							RESET_WIRE = 0;
 							ALU_SRCA = 1; //SELECIONA O REG_A_MUX
 							ALU_SRCB = 0; //SELECIONA O REG_B_MUX
 							ALU_SELECTOR = 2; //SUB 010
+							LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+							DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 							MEM32_WIRE = 0;
-							IR_WIRE = 1;
+							IR_WIRE = 0;
 							LOAD_A = 1;
 							LOAD_B = 1; 
+							LOAD_MDR = 0;
 							PROX_ESTADO = BUSCA;
 						end
+					default: SAIDA_ESTADO[6:0] =99;
 				endcase
 			end
 
 		ADDI:
 			begin
+				SAIDA_ESTADO = 6;
 				PC_WRITE = 0;
 				RESET_WIRE = 0;
 				ALU_SRCA = 1;
 				ALU_SRCB = 2;
 				ALU_SELECTOR = 1;
-				//LOAD_A_OUT = ;
+				//LOAD_ALU_OUT = ;
 				//DMEM_RW = ;
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 				MEM32_WIRE = 0;
 				IR_WIRE = 0;
 				LOAD_A = 0;
 				LOAD_B = 0;
+				LOAD_MDR = 0;
 				//BANCO_WIRE = 0;
 				PROX_ESTADO = BUSCA;
 			end
 
 		SD1:
-					begin
-
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
-						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						//BANCO_WIRE = ;
-						PROX_ESTADO = SD2;
-					end
+			begin
+				SAIDA_ESTADO = 7;
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+				MEM32_WIRE = 1;
+				IR_WIRE = 1;
+				//IR_WIRE = ;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				LOAD_MDR = 0;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = SD2;
+			end
 	        SD2:
-					begin
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
-						DMEM_RW = 1; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						//BANCO_WIRE = ;
-						PROX_ESTADO = BUSCA;
-					end
+			begin
+				SAIDA_ESTADO = 8;
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 1; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+				MEM32_WIRE = 1;
+				IR_WIRE = 1;
+				//IR_WIRE = ;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				LOAD_MDR = 0;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = BUSCA;
+			end
 
 
 		BEQ:
 			begin
+				SAIDA_ESTADO = 9;
 				PC_WRITE = 0;
 				RESET_WIRE = 0;
 				ALU_SRCA = 1;
 				ALU_SRCB = 0;
+				ALU_SELECTOR = 1;
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 1; //0 => 
 				MEM32_WIRE = 0;
 				IR_WIRE = 1;
 				LOAD_A = 1;
-				LOAD_B = 1;
+				LOAD_B = 1;	
+				LOAD_MDR = 0;
 				//BANCO_WIRE = ;
 				PROX_ESTADO = BEQ2;
 			end
 		BEQ2:
 			begin
+				SAIDA_ESTADO = 10;
 				if(Igual == 1)
 				begin
 					PC_WRITE = 0;
@@ -235,10 +276,13 @@ module uc(
 					ALU_SRCA = 0;
 					ALU_SRCB = 3;
 					ALU_SELECTOR = 001;//1
+					LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+					DMEM_RW = 1; //0 => 
 					MEM32_WIRE = 0;
 					IR_WIRE = 1;
 					LOAD_A = 1;
 					LOAD_B = 1;
+					LOAD_MDR = 0;
 					//BANCO_WIRE = ;
 					PROX_ESTADO = BUSCA;
 				end
@@ -246,19 +290,26 @@ module uc(
 
 		BNE:
 			begin
+
+				SAIDA_ESTADO = 11;
 				PC_WRITE = 0;
 				RESET_WIRE = 0;
 				ALU_SRCA = 1;
 				ALU_SRCB = 0;
+				ALU_SELECTOR = 001;//1
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 1; //0 => 
 				MEM32_WIRE = 0;
 				IR_WIRE = 1;
 				LOAD_A = 1;
 				LOAD_B = 1;
+				LOAD_MDR = 0;
 				//BANCO_WIRE = ;
 				PROX_ESTADO = BEQ2;
 			end
 		BNE2:
 			begin
+				SAIDA_ESTADO = 12;
 				if(Igual != 1)
 				begin
 					PC_WRITE = 0;
@@ -270,6 +321,7 @@ module uc(
 					IR_WIRE = 1;
 					LOAD_A = 1;
 					LOAD_B = 1;
+					LOAD_MDR = 0;
 					//BANCO_WIRE = ;
 					PROX_ESTADO = BUSCA;
 				end
@@ -278,72 +330,75 @@ module uc(
 
 		LD1:
 			begin
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1;
-						DMEM_RW = 0;
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						LOAD_MDR = 0;
-						//BANCO_WIRE = ;
-						PROX_ESTADO = LD2;
+				SAIDA_ESTADO = 13;
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				LOAD_ALU_OUT = 1;
+				DMEM_RW = 0;
+				MEM32_WIRE = 1;
+				//IR_WIRE = ;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				LOAD_MDR = 0;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = LD2;
 			end
 		
 		LD2:
 			begin
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
-						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						LOAD_MDR = 1;
-						//BANCO_WIRE = ;
-						PROX_ESTADO = LD3;
+				SAIDA_ESTADO = 14;
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+				MEM32_WIRE = 1;
+				//IR_WIRE = ;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				LOAD_MDR = 1;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = LD3;
 			end
 
 		
 		LD3:
 			begin
-						PC_WRITE = 0;
-						RESET_WIRE = 0;
-						ALU_SRCA = 1;
-						ALU_SRCB = 2;
-						ALU_SELECTOR = 1;
-						LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
-						DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
-						MEM32_WIRE = 1;
-						//IR_WIRE = ;
-						LOAD_A = 1;
-						LOAD_B = 1;
-						LOAD_MDR = 1;
-						MEM_TO_REG=1;
-						WRITE_REG=1;
-						//BANCO_WIRE = ;
-						PROX_ESTADO = BUSCA;
+				SAIDA_ESTADO = 15;
+				PC_WRITE = 0;
+				RESET_WIRE = 0;
+				ALU_SRCA = 1;
+				ALU_SRCB = 2;
+				ALU_SELECTOR = 1;
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
+				DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
+				MEM32_WIRE = 1;
+				//IR_WIRE = ;
+				LOAD_A = 1;
+				LOAD_B = 1;
+				LOAD_MDR = 1;
+				MEM_TO_REG=1;
+				WRITE_REG=1;
+				//BANCO_WIRE = ;
+				PROX_ESTADO = BUSCA;
 			end
 
 
 
 		LUI:
 			begin
-			
+				SAIDA_ESTADO = 16;
 				PC_WRITE = 0;
 				RESET_WIRE = 0;
 				ALU_SRCA = 1;
 				ALU_SRCB = 2;
 				ALU_SELECTOR = 1;
-				LOAD_A_OUT = 1; //FALTA DECLARAR NA UC
+				LOAD_ALU_OUT = 1; //FALTA DECLARAR NA UC
 				DMEM_RW = 0; //0 => READ, 1 => WRITE FALTA DECLARAR NA UC
 				MEM32_WIRE = 1;
 				//IR_WIRE = ;
