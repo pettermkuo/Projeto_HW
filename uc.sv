@@ -1,15 +1,16 @@
 module uc(
- input logic CLK,
- input logic RESET,
+ input logic CLK,//ok
+ input logic RESET,//ok
  input logic Igual,
- input logic [31:0] IR31_0,
- input logic [4:0] IR11_7, IR19_15, IR24_20,
- input logic [6:0] IR6_0,
- output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, MEM64_WIRE, LOAD_A, LOAD_B, BANCO_WIRE, LOAD_ALU_OUT, LOAD_MDR, MEM_TO_REG, WRITE_REG, DMEM_RW,
+ input logic [31:0] IR31_0,//ok
+ input logic [4:0] IR11_7, IR19_15, IR24_20,//ok
+ input logic [6:0] IR6_0,//ok
+ output logic ALU_SRCA, RESET_WIRE, PC_WRITE, IR_WIRE, MEM32_WIRE, LOAD_A, LOAD_B, BANCO_WIRE, LOAD_ALU_OUT, LOAD_MDR, MEM_TO_REG, WRITE_REG, DMEM_RW,
  output logic [2:0] ALU_SELECTOR,
   output logic [6:0] ESTADO_ATUAL,
  output logic [1:0] ALU_SRCB,
- output logic [15:0] SAIDA_ESTADO
+ output logic [15:0] SAIDA_ESTADO,
+output logic[31:25]FUNCT7
  );
  enum logic [15:0]{
   RESET_ESTADO, //0
