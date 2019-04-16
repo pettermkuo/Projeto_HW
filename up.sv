@@ -176,3 +176,4 @@ register ALU_OUT(//ok
  .DadoIn(PC_IN),
  .DadoOut(ALU_OUT_TO_MEM)
  );
+endmodule
