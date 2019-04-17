@@ -2,7 +2,6 @@ module up(
  input logic CLK, RESET
  );
 wire RESET_WIRE;
-wire ALU_SRCA;//ok
 wire IR_WIRE;//ok
 wire LOAD_A;//ok
 wire LOAD_B;//ok
@@ -11,12 +10,12 @@ wire MEM32_WIRE;//ok
 wire BANCO_WIRE;//ok
 wire LOAD_MDR;//ok
 wire LOAD_ALU_OUT;//ok
-wire WRITE_REG;//?
+wire WRITE_REG;//?'
 wire DMEM_RW;//ok
-wire Igual;//?
+wire IGUAL;//?
 wire MUX_MR_WIRE;//ok
+wire [1:0]ALU_SRCA;//ok
 wire [1:0] ALU_SRCB;//ok
-wire [1:0] Shift;//?
 wire [2:0] ALU_SELECTOR;//ok
 wire [4:0] IR19_15;//ok
 wire [4:0] IR24_20;//ok
@@ -27,7 +26,6 @@ wire [31:0] IR31_0;//ok
 wire [31:0] MEM_TO_IR_32;//ok
 wire [31:25]FUNCT7;
 wire [63:0] MEM_TO_REG;//ok
-wire [63:0] ALUOUT_TO_MUX;
 wire [63:0] REGMEM_TO_MUX;
 wire [63:0] MUX_TO_WRITE_DATA;
 wire [63:0] ALU_OUT_TO_MEM;
@@ -43,7 +41,7 @@ wire [63:0] REG_B_MUX;//ok
 wire [63:0] SIGN_OUT;//ok
 wire [63:0] SHIFT_OUT;//ok
 
-uc UC(
+uc UC(//ok
  .CLK(CLK),//OK
  .RESET(RESET),//OK
  .ALU_SRCA(ALU_SRCA),//OK
@@ -63,20 +61,23 @@ uc UC(
  .LOAD_B(LOAD_B),//OK
  .BANCO_WIRE(BANCO_WIRE),//OK
  .LOAD_MDR(LOAD_MDR),//OK
- .Igual(Igual),
+ .IGUAL(IGUAL),
  .SAIDA_ESTADO(SAIDA_ESTADO),
  .LOAD_ALU_OUT(LOAD_ALU_OUT),//OK
- .FUNCT7(FUNCT7)
+ .FUNCT7(FUNCT7),
+ .MUX_MR_WIRE(MUX_MR_WIRE)
  );
-mux2 MUX_A( //ok
+mux4 MUX_A( //ok
  .SELETOR(ALU_SRCA),
- .ENTRADA_1(PC_OUT),
- .ENTRADA_2(REG_A_MUX),
+ .A(PC_OUT),
+ .B(REG_A_MUX),
+ .C(64'd0),
+ .D(),
  .SAIDA(A_IN_ALU)
  );
 mux2 MUX_MR( //ok
  .SELETOR(MUX_MR_WIRE),
- .ENTRADA_1(ALUOUT_TO_MUX),
+ .ENTRADA_1(ALU_OUT_TO_MEM),
  .ENTRADA_2(REGMEM_TO_MUX),
  .SAIDA(MUX_TO_WRITE_DATA)
  );
@@ -122,6 +123,7 @@ bancoReg BANCOREG(//ok
         .dataout1(RS1),
         .dataout2(RS2)
 );
+
 Memoria32 MEMORIA32(//p
  .raddress(PC_OUT[31:0]), //endereÃ§o de ler
  .waddress(), //endereÃ§o de esrever (mem32 nunca escreve)
@@ -130,6 +132,7 @@ Memoria32 MEMORIA32(//p
  .Dataout(MEM_TO_IR_32),
  .Wr(MEM32_WIRE) //define se Ã© leitura ou escrita
  );
+
 Memoria64 MEMORIA64(//p
  .raddress(ALU_OUT_TO_MEM), //endereÃ§o de ler //PC_IN pq eh a saida do alu_out
  .waddress(ALU_OUT_TO_MEM), //endereÃ§o de escrever
@@ -138,6 +141,7 @@ Memoria64 MEMORIA64(//p
  .Dataout(MEM_TO_REG), //saida vai ser a entrada do memory data reg
  .Wr(DMEM_RW) //wr se for 0 le, se for 1 escreve
  );
+
 register PC(//ok
  .clk(CLK),
  .reset(RESET),
@@ -145,6 +149,7 @@ register PC(//ok
  .DadoIn(PC_IN),
  .DadoOut(PC_OUT)
  );
+
 register REG_A(//ok
  .clk(CLK),
  .reset(RESET),
@@ -152,6 +157,7 @@ register REG_A(//ok
  .DadoIn(RS1),
  .DadoOut(REG_A_MUX)
  );
+
 register REG_B(//ok
  .clk(CLK),
  .reset(RESET),
@@ -165,15 +171,25 @@ SignExt SIGNEXT(//ok
  .saida(SIGN_OUT),
  .IR6_0(IR6_0)
  );
+
 ShiftL1 SHIFTL1(//ok
  .entrada(SIGN_OUT),
  .saida(SHIFT_OUT)
  );
+
 register ALU_OUT(//ok
  .clk(CLK),
  .reset(RESET),
  .regWrite(LOAD_ALU_OUT),
  .DadoIn(PC_IN),
  .DadoOut(ALU_OUT_TO_MEM)
+ );
+
+register MEMORY_DATA_REG(//ok
+ .clk(CLK),
+ .reset(RESET),
+ .regWrite(LOAD_MDR),
+ .DadoIn(MEM_TO_REG),
+ .DadoOut(REG_MEM_TO_MUX)
  );
 endmodule
