@@ -6,12 +6,13 @@ module SignExt(
 	always_comb
 	begin 
 	case(IR6_0)
-		0010011://ADDI
+		19: //ADDI
 		begin
 			saida[63:12] = 0;
 			saida[11:0] = entrada[31:20];
 		end
-		1100011://BEQ
+		/*
+		99: //BEQ
 		begin
 			saida[0] = 0;
 			saida[4:1] = entrada[11:8];
@@ -20,7 +21,7 @@ module SignExt(
 			saida[12] = entrada[31];
 			saida[63:13] = 0;
 		end
-		1100111://BNE
+		103: //BNE
 		begin
 			saida[0] = 0;
 			saida[4:1] = entrada[11:8];
@@ -29,14 +30,17 @@ module SignExt(
 			saida[12] = entrada[31];
 			saida[63:13] = 0;
 		end
-		0110111://LUI
+		*/
+		
+		55: //LUI
 		begin
 		saida[31:12] = entrada[31:12];
 		saida[11:0]=0;
 		if(entrada[31]==0)saida[63:32]=0;
 		else saida[63:32]=1;
 		end
-		default: saida[63:0] = 0;
+
+		
 	endcase
 	end
 endmodule
